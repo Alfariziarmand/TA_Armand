@@ -7,7 +7,7 @@
       $databaseUsername = 'root';
       $databasePassword = '';
       $mysqli = mysqli_connect($databaseHost, $databaseUsername, $databasePassword, $databaseName); 
-	  $result = mysqli_query($mysqli, "SELECT * FROM maintable order by nox");      
+	  $result = mysqli_query($mysqli, "SELECT * FROM maintable order by noy,nox");      
     ?>
     <style>
     	td{
@@ -66,25 +66,27 @@
 <p>
 	<table>
             		<?php
-            		$x = 1;
+            		$y = 1;
             		while ($user_data = mysqli_fetch_array($result)) {
-            			$temp = $user_data['nox'];
-            			if ($temp != $x) {
-            				$x++;
+            			$temp = $user_data['noy'];
+            			if ($temp != $y) {
+            				$y++;
             				echo "<tr>";
             			}
             			echo "<div class='dropdown'>";
-            			echo "<td>";
+            			echo "<td id=";
+                  echo $user_data['id'];
+                  echo ">";
             			echo "<button onclick='myFunction()' class='dropbtn'>";
             			echo $user_data['lux'];
             			echo "</button>";
             			echo "<div id='myDropdown' class='dropdown-content'>";
-    					echo "<a href='#home'>Home</a>";
-    					echo "<a href='#about'>About</a>";
+    					    echo "<a href='#home'>Home</a>";
+    					    echo "<a href='#about'>About</a>";
             			echo "</div";
             			echo "</td>";
             			echo "</div>";
-            			if ($temp != $x) {
+            			if ($temp != $y) {
             				echo "</tr>";
             				
             			}
