@@ -1,128 +1,113 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<?php
-      $databaseHost = 'localhost';
-	  $databaseName = 'id10054946_databasearmand';
-      $databaseUsername = 'root';
-      $databasePassword = '';
-      $mysqli = mysqli_connect($databaseHost, $databaseUsername, $databasePassword, $databaseName); 
-	  $result = mysqli_query($mysqli, "SELECT * FROM maintable order by noy,nox");      
-    ?>
-    <style>
-    	td{
-    		text-align: center;
-    		width: 75px;
-    		height: 75px;
-    		/*background-color: grey;*/
-
-    	}
-    	.dropbtn {
-  background-color: #3498DB;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  width: 70px;
-  height: 70px;
-  border: none;
-  cursor: pointer;
-}
-
-.dropbtn:hover, .dropbtn:focus {
-  background-color: #2980B9;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown a:hover {background-color: #ddd;}
-
-.show {display: block;}
-
-    </style>
-	<title>Mapping daylighting in square grid</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="style-grid.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <!-- developing navbar -->
+  <?php
+      require 'dbconfig.php'; 
+      $result = mysqli_query($mysqli, "SELECT * FROM maintable order by noy,nox");      
+  ?>
+  <title>Mapping daylighting in square grid</title>
 </head>
 <body>
-<div>
-<p>
-	<table>
-            		<?php
-            		$y = 1;
-            		while ($user_data = mysqli_fetch_array($result)) {
-            			$temp = $user_data['noy'];
-            			if ($temp != $y) {
-            				$y++;
-            				echo "<tr>";
-            			}
-            			echo "<div class='dropdown'>";
-            			echo "<td id=";
-                  echo $user_data['id'];
-                  echo ">";
-            			echo "<button onclick='myFunction()' class='dropbtn'>";
-            			echo $user_data['lux'];
-            			echo "</button>";
-            			echo "<div id='myDropdown' class='dropdown-content'>";
-    					    echo "<a href='#home'>Home</a>";
-    					    echo "<a href='#about'>About</a>";
-            			echo "</div";
-            			echo "</td>";
-            			echo "</div>";
-            			if ($temp != $y) {
-            				echo "</tr>";
-            				
-            			}
-            			}
-            		?>
-            		<script>
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-					function myFunction() {
-  					document.getElementById("myDropdown").classList.toggle("show");
-					}
+  <div class="container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  
+  <a class="navbar-brand" href="#">
+    Navigation
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="new.php">New<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="clear.php">Clear</a>
+        </li>
+      </ul>
+    <!-- <form class="form-inline my-2 my-lg-0" action="create_table.php">
+      <input class="form-control mr-sm-2" type="form-text" placeholder="Search" aria-label="Search">
+      <input class="form-control mr-sm-2" type="form-text" placeholder="Search" aria-label="Search">
+      <input type="submit" value="submit">
+    </form> -->
+    </div>
+  
+  </nav>
+  <p>
+    <table>
+      <?php
+      $y = 1;
+      while ($user_data = mysqli_fetch_array($result)) {
+        $temp = $user_data['noy'];
+        if ($temp != $y) {
+          $y++;
+          echo "<tr>";
+        }
+        echo "<td id=";
+        echo $user_data['id'];
+        echo ">";    
+        echo "<a href=update.php?id=";
+        echo $user_data['id'];  
+        echo ">";        
+        echo $user_data['lux'];
+        echo "</a></td>";
+        if ($temp != $y) {
+          echo "</tr>";
+        }
+      }
 
-// Close the dropdown if the user clicks outside of it
-					window.onclick = function(event) 
-					{
-  					if (!event.target.matches('.dropbtn')) 
-  						{
-   					 	var dropdowns = document.getElementsByClassName("dropdown-content");
-    					var i;
-    					for (i = 0; i < dropdowns.length; i++) 
-    						{
-     					 	var openDropdown = dropdowns[i];
-     					 	if (openDropdown.classList.contains('show'))
-     					 		{
-      					  		openDropdown.classList.remove('show');
-      							}
-   							}
-  						}
-					}
-					</script>
-            	</table>
-</p></div>
-<div>
-	<p>
-		kembali ke halaman awal <a href="index.php">click here</a>
-	</p>
-</div>
+      // drop down
+                // echo "<td id=";
+                // echo $user_data['id'];
+                // echo ">";
+                // echo "<div class='dropdown'>";            
+                // echo "<button onclick='myFunction()' class='dropbtn'>";
+                // echo $user_data['lux'];
+                // echo "</button>";
+                // echo "<div id='myDropdown' class='dropdown-content'>";
+                // echo "<a href='update.php?=";
+                // echo $user_data['id'];
+                // echo "'>update</a>";
+                // echo "<a href='#about'>About</a>";
+                // echo "</div";
+                // echo "</div>";
+                // echo "</td>";
+      ?>
+    <script>
+    //When the user clicks on the button, 
+    //toggle between hiding and showing the dropdown content
+    function myFunction() {
+      document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+  </script>              
+  </table>
+  </p>
+  <p>
+              kembali ke halaman awal <a href="new.php" style="color:purple;">click here</a>
+  </p>
+  <p>
+              Clear data <a href="clear.php" style="color:purple; ">click here</a>
+  </p>
 </body>
 </html>
