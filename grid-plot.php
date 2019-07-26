@@ -109,5 +109,8 @@
   <p>
               Clear data <a href="clear.php" style="color:purple; ">click here</a>
   </p>
+  <p>
+              Export to JSON Format <a href="export.php" style="color:purple; ">click here</a>
+  </p>
 </body>
 </html>
