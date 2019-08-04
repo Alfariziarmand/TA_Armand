@@ -2,10 +2,8 @@
 
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
-$databaseHost = 'localhost';
-$databaseName = 'id10054946_databasearmand';
-$databaseUsername = 'root';
-$databasePassword = '';
+
+require 'dbconfig.php';
 
 
 //Creating Array for JSON response
@@ -22,7 +20,7 @@ if (isset($_GET['xlen']) && isset($_GET['ylen'])) {
     // $hum = $_GET['hum'];
  
     // Include data base connect class
-    $mysqli = mysqli_connect($databaseHost, $databaseUsername, $databasePassword, $databaseName); 
+    // $mysqli = mysqli_connect($databaseHost, $databaseUsername, $databasePassword, $databaseName); 
     $clear = mysqli_query($mysqli, "DELETE FROM maintable");
     
     // Fire SQL query to delete table in maintable
@@ -32,7 +30,7 @@ if (isset($_GET['xlen']) && isset($_GET['ylen'])) {
     while ($y <= $ylen) {
         $x = 1;
         while ($x <= $xlen) {
-            $result = mysqli_query($mysqli,"INSERT INTO maintable(lux, nox, noy) VALUES(0,$x,$y)");
+            $result = mysqli_query($mysqli,"INSERT INTO maintable(value, nox, noy) VALUES(0,$x,$y)");
             $x++;
         }
        $y++;

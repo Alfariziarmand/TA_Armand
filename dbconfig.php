@@ -1,21 +1,17 @@
 <?php
-/****************************************************/
-/************** Created by : Vivek Gupta ************/
-/***************     www.vsgupta.in     *************/
-/***************     www.iotmonk.com     *************/
-/****************************************************/ 
-
-/*Source code version
-define('DB_USER', "id10054946_databasearmand");     // Your database user name
-define('DB_PASSWORD', "");			// Your database password (mention your db password here)
-define('DB_DATABASE', "id10054946_databasearmand"); // Your database name
-define('DB_SERVER', "localhost");			// db server (Mostly will be 'local' host)
-*/
-
+//---------------DEFINE DB
+//----------for localhost
 $databaseHost = 'localhost';
-$databaseName = 'id10054946_databasearmand';
+$databaseName = 'id10347769_mydata';
 $databaseUsername = 'root';
 $databasePassword = '';
-$mysqli = mysqli_connect($databaseHost, $databaseUsername, $databasePassword, $databaseName);
 
-?>
+//-----------for uploaded
+// $databaseHost = 'localhost';
+// $databaseName = 'id10347769_mydata';
+// $databaseUsername = 'id10347769_mydata';
+// $databasePassword = 'mydata';
+
+
+//---------------CONNECT MYSQL
+$mysqli = mysqli_connect($databaseHost, $databaseUsername, $databasePassword, $databaseName);

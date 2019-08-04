@@ -56,7 +56,7 @@
         echo "<a href=update.php?id=";
         echo $user_data['id'];  
         echo ">";        
-        echo $user_data['lux'];
+        echo $user_data['value'];
         echo "</a></td>";
         if ($temp != $y) {
           echo "</tr>";
@@ -80,7 +80,7 @@
                 // echo "</div>";
                 // echo "</td>";
       ?>
-    <script>
+    <!-- <script>
     //When the user clicks on the button, 
     //toggle between hiding and showing the dropdown content
     function myFunction() {
@@ -100,7 +100,7 @@
         }
       }
     }
-  </script>              
+  </script>  -->             
   </table>
   </p>
   <p>

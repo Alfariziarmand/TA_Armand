@@ -12,19 +12,19 @@ require 'dbconfig.php';
  
  // Fire SQL query to get all data from weather
 // $result = mysql_query("SELECT *FROM weather ORDER BY id DESC LIMIT 1") or die(mysql_error());
-$result = mysqli_query($mysqli,"SELECT lux, nox, noy FROM `maintable` order by noy,nox");
+$result = mysqli_query($mysqli,"SELECT value, nox, noy FROM `maintable` order by noy,nox");
 $response["map"] = array();
 $temp= array();
 $y=1;
 while ($row = mysqli_fetch_array($result)) {
         if ($row["noy"] == $y) {
-        array_push($temp, $row["lux"]);
+        array_push($temp, $row["value"]);
         }
         elseif ($row["noy"] >= $y) {
             $y+=1;
             array_push($response["map"], $temp);
             $temp=array();
-            array_push($temp, $row["lux"]);
+            array_push($temp, $row["value"]);
         } 
         
     }

@@ -5,7 +5,7 @@
 // header("Content-Type: application/json; charset=UTF-8");
 
 //Creating Array for JSON response
-$response = array();
+// $response = array();
  
 // Check if we got the field from the user
 if (isset($_GET['id'])) {
@@ -13,21 +13,21 @@ if (isset($_GET['id'])) {
     $id = $_GET['id'];
     require 'dbconfig.php';
     
-    $temp1 = mysqli_query($mysqli,"SELECT * FROM `lux_in` ORDER by time_1 DESC LIMIT 1 ");
+    $temp1 = mysqli_query($mysqli,"SELECT lux FROM `luxindoor` ORDER by date DESC LIMIT 1 ");
     $data1 = mysqli_fetch_array($temp1);
     
-    $temp2 = mysqli_query($mysqli,"SELECT * FROM `lux_out` ORDER by time_2 DESC LIMIT 1 ");
+    $temp2 = mysqli_query($mysqli,"SELECT lux FROM `luxoutdoor` ORDER by date DESC LIMIT 1 ");
     $data2 = mysqli_fetch_array($temp2);
 
-    $in = $data1['lux_in'];
-    $out = $data2['lux_out'];
+    $in = $data1['lux'];
+    $out = $data2['lux'];
     $df = $in/$out;
     
-    $result = mysqli_query($mysqli, "UPDATE `maintable` SET `lux` = '$df' WHERE `maintable`.`id` = '$id'" );
+    $result = mysqli_query($mysqli, "UPDATE `maintable` SET `value` = '$df' WHERE `maintable`.`id` = '$id'" );
     
   
 }
-header("Location: /file/grid-plot.php"); 
+header("Location: grid-plot.php"); 
 exit; 
     // $result = mysql_query("UPDATE weather SET lux= '$lux' WHERE id = '$id'");
  
