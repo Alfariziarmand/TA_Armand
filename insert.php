@@ -42,7 +42,7 @@ if (isset($_GET['lux_1'])) {
         echo json_encode($response);
     }
 }
-if (isset($_GET['lux_2'])) {
+elseif (isset($_GET['lux_2'])) {
  
  
     $lux = $_GET['lux_2'];
