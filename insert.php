@@ -19,10 +19,10 @@ if (isset($_GET['lux_1'])) {
     require 'dbconfig.php';
  	
     // Connecting to database 
- 
+    $sql = "INSERT INTO `luxindoor` (`lux`, `date`) VALUES ('$lux', DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 7 hour))";
     
     // Fire SQL query to insert data in weather
-    $result = mysqli_query($mysqli,"INSERT INTO lux_in(lux_in) VALUES('$lux')");
+    $result = mysqli_query($mysqli,$sql);
     
  
     // Check for succesfull execution of query
@@ -53,9 +53,9 @@ if (isset($_GET['lux_2'])) {
  	
     // Connecting to database 
  
-    
+    $sql = "INSERT INTO `luxoutdoor` (`lux`, `date`) VALUES ('$lux', DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 7 hour))";
     // Fire SQL query to insert data in weather
-    $result = mysqli_query($mysqli,"INSERT INTO lux_out(lux_out) VALUES('$lux')");
+    $result = mysqli_query($mysqli,$sql);
     
  
     // Check for succesfull execution of query

@@ -21,7 +21,7 @@ if (isset($_GET['id'])) {
 
     $in = $data1['lux'];
     $out = $data2['lux'];
-    $df = $in/$out;
+    $df = 100*$in/$out;
     
     $result = mysqli_query($mysqli, "UPDATE `maintable` SET `value` = '$df' WHERE `maintable`.`id` = '$id'" );
     
